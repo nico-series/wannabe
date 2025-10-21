@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.get("/hello", (_, res) => {
-  res.send("Hello Vite + React + TypeScript!");
+  res.send("Hello Wannabe");
 });
 
 ViteExpress.listen(app, +PORT, () =>

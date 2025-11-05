@@ -1,6 +1,5 @@
 import "./App.css";
-
-import ProdGoalsForm from "./components/ProdGoalsForm.js";
+import RecipesForm from "./components/RecipesForm.js";
 
 function App() {
   return (
@@ -8,7 +7,7 @@ function App() {
       <h1>Wannabe</h1>
       <p>Another Factorio tool</p>
 
-      <ProdGoalsForm />
+      <RecipesForm />
     </div>
   );
 }

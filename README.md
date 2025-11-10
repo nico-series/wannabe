@@ -35,29 +35,34 @@ Then we do the calculations and print the thing.
         - Despite choosing a Node alternative, I appear to still be using a lot of Node
     - Installed **Vitest** because it works with **Vite** and **Jest** didn't appear friendly to my setup on cursory look 
 - [ ] 2. Build recipes form that uses mock data
-    - 2 inputs, recipe and quantity
-    - Mocked recipes should be fetched from the api
-    - Relevant restrictions should be applied to quantity based on recipe
-    - Test form behavior
-    - Visible erroring (for user, not debug)
+    - [x] 2 inputs, recipe and quantity
+    - [x] Mocked recipes should be fetched from the api
+    - [ ] Relevant restrictions should be applied to quantity based on recipe
 - [ ] 3. Form submission and basic processing
-    - Add submit button, send a recipe and quantity to backend
-    - On backend, accept a recipe and quantity, validate it, error if incorrect, send ingredients back
-    - Test submit button and backend erroring
-- [ ] 4. Start playing with _a sample of_ actual data
+    - [ ] Add submit button, send a recipe and quantity to backend
+    - [ ] On backend, accept a recipe and quantity, validate it, error if incorrect, send ingredients back
+    - [ ] Test submit button and backend erroring
+- [ ] 4. Keep good habits 
+    - [ ] Review and implement accessibility requirements
+    - [ ] Unit test form behavior
+    - [ ] Visible erroring (for user, not debug)
+    - [ ] Clean up comments, todos, etc. 
+- [ ] 5. Start playing with _a sample of_ actual data
     - Since this is a playful, experimental project, I will cross the "which database" bridge when I get to it
-- [ ] 5. Add global config settings
+- [ ] 6. Add global config settings
     - Game state select, technology select
     - Send in api request
     - Support it on backend
-- [ ] 6. Answer questions better left till we've seen basic app behavior
+- [ ] 7. Answer questions better left till we've seen basic app behavior
     - How difficult is it to include technologies as a recipe?
     - How difficult is it to model nuclear power?
     - Do I want to calculate optimal beacon/module config for the printout?
     - What do I want to do about data visualization?
     - Do I want to support mods?
-- [ ] 7. Make it PRETTY
-- [ ] 8. Add full dataset
+- [ ] 8. Make it PRETTY
+- [ ] 9. Add full dataset
+    - [ ] Start working with E2E and Integration tests
+    - [ ] Data
 
 ### Open Questions
 

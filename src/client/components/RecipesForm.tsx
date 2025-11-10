@@ -7,9 +7,17 @@ import React, { useState, useEffect } from 'react';
  * @returns a view of the production recipes form prompting the user for a recipe to calculate requirements for
  */
 export default function RecipesForm() {
-  const BLANK_RECIPE = "0000";
-
-  const [recipe, setRecipe] = useState(BLANK_RECIPE);
+  const BLANK_RECIPE : Recipe = {
+    id: "0000",
+    name: "Please select a recipe",
+    type: "",
+    unit: "",
+    minQty: 0,
+    maxQty: 1,
+  }
+  // so in a work setting ive seen folks just slap <any> here but id like to know a better way to force type it and not fly by the seat of my pants
+  // i could also just lock the quantity field rather than filling it with blank data, see if there is a way for it to not be upset until the fields are set
+  const [recipe, setRecipe] = useState<Recipe>(BLANK_RECIPE);
   const [quantity, setQuantity] = useState(0);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   
@@ -21,27 +29,57 @@ export default function RecipesForm() {
       setRecipes(data);
     })
     .catch((err) => {
-      // TODO: will want to verify error behavior is satisfactory once API is active
       console.log("NICO: " + err.message);
     });
   }, []);
+
+  /**
+   * since recipe select will grab an id which we need multiple recipe fields pertaining to
+   * we need to grab the recipe, then set the relevant validation and notes
+   */
+  const handleRecipeChange = (recipeId : string) => {
+    let currRecipe = recipes.find(({id}) => id === recipeId);
+    if (currRecipe) {
+      setRecipe(currRecipe);
+    } else {
+      console.log(`NICO: ${recipeId} does not correspond to a real recipe.`);
+    }
+    
+  }
+  /**  
+   * quantity will likely have recipe-specific validation
+   * but only whats needed for user ease (what ranges are acceptable)
+   * most safety checking should be in the backend
+   * because all the client tomfoolery is visible in the browser
+   */
+  const handleQtyChange = (qty : string) => {
+    if (!isNaN(Number(qty))) {
+          setQuantity(Number(qty));
+    } else {
+      // TODO: communicate with user via decent visible error messages
+      console.log(`NICO: Somehow ${qty}, collected from a number input, is NaN.`);
+    }
+  }
 
   return (
     <>
       <p>Given a production recipe, the form should return the necessary build requirements.</p>
       <form>
         <label htmlFor="recipe">Recipe:
-          <select id="recipe" name="recipe" value={recipe} onChange={(e) => setRecipe(e.target.value)}>
+          <select id="recipe" name="recipe" onChange={(e) => handleRecipeChange(e.target.value)}>
             { recipes.map(r => (
               <option key={r.id} value={r.id}>{r.name}</option>
             ))}
           </select>
         </label>
-        <label htmlFor="quantity">Quantity: 
-          <input type="number" id="quantity"></input>
-        </label>
+          { recipe.id !== "0000" && (
+            <label htmlFor="quantity">Quantity: 
+              <input type="number" id="quantity" min={recipe.minQty} max={recipe.maxQty} value={quantity} onChange={(e) => handleQtyChange(e.target.value)}></input>
+              <span>{recipe.unit}</span>
+            </label>
+          )}
       </form>
-      <p>Current recipe: { recipe }</p>
+      <p>Current recipe: { recipe.name }</p>
     </>
   );
 }
@@ -50,4 +88,7 @@ interface Recipe {
   id: string;
   name: string;
   type: string;
+  unit: string;
+  minQty: number;
+  maxQty: number;
 }

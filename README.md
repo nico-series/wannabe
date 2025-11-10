@@ -39,6 +39,7 @@ Then we do the calculations and print the thing.
     - Mocked recipes should be fetched from the api
     - Relevant restrictions should be applied to quantity based on recipe
     - Test form behavior
+    - Visible erroring (for user, not debug)
 - [ ] 3. Form submission and basic processing
     - Add submit button, send a recipe and quantity to backend
     - On backend, accept a recipe and quantity, validate it, error if incorrect, send ingredients back
@@ -62,6 +63,9 @@ Then we do the calculations and print the thing.
 
 #### A Data Visualization Element
 Recursive recipes could be visualized as a flow chart. If multiple paths are available, either multiple independent charts could be generated, or they could be visualized as a color-coded tree displaying the requirements for each recipe. In said tree, as a path diverges based on some decision, it would be identified by a different colors. Perhaps at render, if a preferred path is selected, it might be green, and deviations would be tones off from that green based on their efficiency / desirability. 
+
+### Bugs and Silliness
+- [ ] When Lamps mock recipe is selected, Quantity number input increases in width (and stays that way)
 
 ## Credits
 - https://github.com/DaTrueBrad/ for the `vite-express` setup overview

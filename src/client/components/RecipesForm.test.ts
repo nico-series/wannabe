@@ -8,6 +8,10 @@ describe('goal input', () => {
     test('should populate a list', () => {
         
     });
+    
+    test('should behave decently when recipes list returns slowly', () => {
+        // haven't decided what decency is yet
+    });
 });
 
 describe('quantity input', () => {

@@ -34,10 +34,10 @@ Then we do the calculations and print the thing.
     - Wanted a monorepo **React**+**Express** setup for convenience, chose **Vite-Express** for this purpose
         - Despite choosing a Node alternative, I appear to still be using a lot of Node
     - Installed **Vitest** because it works with **Vite** and **Jest** didn't appear friendly to my setup on cursory look 
-- [ ] 2. Build recipes form that uses mock data
+- [x] 2. Build recipes form that uses mock data
     - [x] 2 inputs, recipe and quantity
     - [x] Mocked recipes should be fetched from the api
-    - [ ] Relevant restrictions should be applied to quantity based on recipe
+    - [x] Relevant restrictions should be applied to quantity based on recipe
 - [ ] 3. Form submission and basic processing
     - [ ] Add submit button, send a recipe and quantity to backend
     - [ ] On backend, accept a recipe and quantity, validate it, error if incorrect, send ingredients back
@@ -60,6 +60,7 @@ Then we do the calculations and print the thing.
     - What do I want to do about data visualization?
     - Do I want to support mods?
 - [ ] 8. Make it PRETTY
+    - [ ] Loading spinners?
 - [ ] 9. Add full dataset
     - [ ] Start working with E2E and Integration tests
     - [ ] Data

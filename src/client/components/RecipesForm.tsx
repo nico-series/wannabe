@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
  * Unlikely that the app utilizes multiple forms as that currently is beyond scope
  * However, it seems prudent to separate this guy out from the main app component just in case, so I shall
  * 
- * @returns a view of the production recipes form prompting the user for a recipe to calculate requirements for
+ * @returns a form which gathers recipe criteria used to calculate the production requirements
  */
 export default function RecipesForm() {
   const BLANK_RECIPE : Recipe = {
@@ -15,13 +15,18 @@ export default function RecipesForm() {
     minQty: 0,
     maxQty: 1,
   }
-  // so in a work setting ive seen folks just slap <any> here but id like to know a better way to force type it and not fly by the seat of my pants
-  // i could also just lock the quantity field rather than filling it with blank data, see if there is a way for it to not be upset until the fields are set
+
+  // TODO: is this even a decent approach? should i <any>
   const [recipe, setRecipe] = useState<Recipe>(BLANK_RECIPE);
   const [quantity, setQuantity] = useState(0);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   
-  // fetch recipe options, should run once on initial render due to empty dependencies
+  /**
+   * Use Effect
+   * fetch and set recipe options
+   * in angular this would be in a service but it looks tidy at this scale & scope so it's fine
+   * it would probably be best to use an await fetch format
+   */
   useEffect(() => {
     fetch('/recipes')
     .then((res) => res.json())
@@ -29,17 +34,19 @@ export default function RecipesForm() {
       setRecipes(data);
     })
     .catch((err) => {
+      // TODO: communicate with user on failure
       console.log("NICO: " + err.message);
     });
   }, []);
 
   /**
-   * since recipe select will grab an id which we need multiple recipe fields pertaining to
-   * we need to grab the recipe, then set the relevant validation and notes
+   * Handle Recipe Change
+   * set current recipe, reset other form fields, describe recipe for user
    */
   const handleRecipeChange = (recipeId : string) => {
     let currRecipe = recipes.find(({id}) => id === recipeId);
     if (currRecipe) {
+      setQuantity(0);
       setRecipe(currRecipe);
     } else {
       console.log(`NICO: ${recipeId} does not correspond to a real recipe.`);
@@ -47,18 +54,24 @@ export default function RecipesForm() {
     
   }
   /**  
-   * quantity will likely have recipe-specific validation
-   * but only whats needed for user ease (what ranges are acceptable)
-   * most safety checking should be in the backend
-   * because all the client tomfoolery is visible in the browser
+   * Handle Quantity Change
+   * trigger any non-range validation with user feedback
    */
   const handleQtyChange = (qty : string) => {
     if (!isNaN(Number(qty))) {
           setQuantity(Number(qty));
     } else {
-      // TODO: communicate with user via decent visible error messages
+      // TODO: communicate with user via decent visible error messages, this should be reusable
       console.log(`NICO: Somehow ${qty}, collected from a number input, is NaN.`);
     }
+  }
+
+  /**
+   * Handle Submit
+   * submit the form, send selected recipe and quantity for processing
+   */
+  const handleSubmit = (e : any) => {
+   e.preventDefault();
   }
 
   return (
@@ -78,8 +91,9 @@ export default function RecipesForm() {
               <span>{recipe.unit}</span>
             </label>
           )}
+          <button style={{display: "block", margin: "5px auto"}} type="submit" onClick={(e) => handleSubmit(e)}>Calculate Requirements</button>
       </form>
-      <p>Current recipe: { recipe.name }</p>
+      <p>Current recipe: {recipe.type}: {quantity} {recipe.name}&#40;s&#41; in {recipe.unit}</p>
     </>
   );
 }

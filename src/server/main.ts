@@ -16,6 +16,12 @@ APP.get("/recipes", (_, res) => {
   res.send(recipes);
 });
 
-ViteExpress.listen(APP, +PORT, () =>
-  console.log("Server is listening on port 3000..."),
-);
+// since this can be edited we've got to validate it again
+APP.get("/recipes/:recipeid/:qty", (req, res) => {
+  let id = req.params.recipeid;
+  let qty = req.params.qty;
+});
+
+ViteExpress.listen(APP, +PORT, () => {
+  console.log("Server is listening on port 3000...");
+});

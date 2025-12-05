@@ -25,4 +25,8 @@ describe('form', () => {
     test('should submit with valid data', () => {
 
     });
+
+    test('should behave decently when requirements return slowly', () => {
+        // haven't decided what decency is yet
+    });
 });

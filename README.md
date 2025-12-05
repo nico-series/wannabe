@@ -38,14 +38,14 @@ Then we do the calculations and print the thing.
     - [x] 2 inputs, recipe and quantity
     - [x] Mocked recipes should be fetched from the api
     - [x] Relevant restrictions should be applied to quantity based on recipe
-- [ ] 3. Form submission and basic processing
-    - [ ] Add submit button, send a recipe and quantity to backend
-    - [ ] On backend, accept a recipe and quantity, validate it, error if incorrect, send ingredients back
-    - [ ] Test submit button and backend erroring
+- [x] 3. Form submission and basic processing
+    - [x] Add submit button, send a recipe and quantity to backend
+    - [x] On backend, accept a recipe and quantity, send ingredients back
 - [ ] 4. Keep good habits 
-    - [ ] Review and implement accessibility requirements
-    - [ ] Unit test form behavior
     - [ ] Visible erroring (for user, not debug)
+    - [ ] Validate form inputs on front and back end
+    - [ ] Review and implement accessibility requirements
+    - [ ] Unit test form behavior, erroring, validation
     - [ ] Clean up comments, todos, etc. 
 - [ ] 5. Start playing with _a sample of_ actual data
     - Since this is a playful, experimental project, I will cross the "which database" bridge when I get to it
@@ -60,7 +60,7 @@ Then we do the calculations and print the thing.
     - What do I want to do about data visualization?
     - Do I want to support mods?
 - [ ] 8. Make it PRETTY
-    - [ ] Loading spinners?
+    - [ ] Loading spinners and time wasting? Yeah I'm going to need something because the form is set to render conditionally
 - [ ] 9. Add full dataset
     - [ ] Start working with E2E and Integration tests
     - [ ] Data
@@ -72,6 +72,9 @@ Recursive recipes could be visualized as a flow chart. If multiple paths are ava
 
 ### Bugs and Silliness
 - [ ] When Lamps mock recipe is selected, Quantity number input increases in width (and stays that way)
+    - Probably can fix during the styling stage by setting it to a regular width 
+- [x] Initial recipe select should have a 'select recipe' initial option and not laugh at you if you want the first option listed (Small Thing currently)
+    - Decided not to go with a select recipe option and to instead just set a default value and set the quantity based off of that, as a result the form needs to be hidden until these values are available
 
 ## Credits
 - https://github.com/DaTrueBrad/ for the `vite-express` setup overview

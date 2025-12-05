@@ -2,8 +2,8 @@ import express from "express";
 import ViteExpress from "vite-express";
 
 const PORT = process.env.PORT || 3000;
-// begone lowercase const!!!
-const APP = express();
+const app = express();
+app.use(express.json());
 
 // reserve 0000 for blank reipe
 const recipes = [
@@ -12,16 +12,19 @@ const recipes = [
   {id: "0003", name: "Bright Thing", type: "Logistics", unit: "units/second", minQty: 0, maxQty: 10000}
 ]
 
-APP.get("/recipes", (_, res) => {
+app.get("/recipes", (_, res) => {
   res.send(recipes);
 });
 
-// since this can be edited we've got to validate it again
-APP.get("/recipes/:recipeid/:qty", (req, res) => {
-  let id = req.params.recipeid;
-  let qty = req.params.qty;
+app.post("/requirements", (req, res) => {
+  const goal = req.body;
+  // validate the goal, does it match available recipes
+
+  // do stuff with the goal
+  
+  res.send(JSON.stringify(goal));
 });
 
-ViteExpress.listen(APP, +PORT, () => {
+ViteExpress.listen(app, +PORT, () => {
   console.log("Server is listening on port 3000...");
 });
